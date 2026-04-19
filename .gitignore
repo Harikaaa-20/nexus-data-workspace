@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+.env
+database.sqlite
+uploads/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
