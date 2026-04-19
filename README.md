@@ -59,5 +59,14 @@ It combines synchronized live cursors with a custom-engineered Natural Language 
 **1. The Analytics Live Canvas**
 Upload raw CSV files via the secure sidebar panel. As you query the AI Data Assistant, rendered HTML5 charts will broadcast directly into your active dashboard tabs.
 
+![Analytics Canvas](./screenshots/first.png)
+
 **2. Figma-Style Presence**
 Share your URL Invite link with your team. Instantly see their named cursors hovering over the data canvas, drastically reducing friction during remote analysis presentations.
+
+![Figma-Style Presence](./screenshots/second.png)
+
+**3. Insights & Visualization**
+Generate powerful insights and visual trends from your imported datasets.
+
+![Insights & Visualization](./screenshots/third.png)
