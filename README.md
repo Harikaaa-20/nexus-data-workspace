@@ -56,9 +56,11 @@ It combines synchronized live cursors with a custom-engineered Natural Language 
 
 ## 📸 Screenshots & Usage
 
-![App Screenshot 1](./screenshots/first.png)
-![App Screenshot 2](./screenshots/second.png)
-![App Screenshot 3](./screenshots/third.png)
+<p align="center">
+  <img src="./screenshots/first.png" width="32%" alt="App Screenshot 1" />
+  <img src="./screenshots/second.png" width="32%" alt="App Screenshot 2" />
+  <img src="./screenshots/third.png" width="32%" alt="App Screenshot 3" />
+</p>
 
 **1. The Analytics Live Canvas**
 Upload raw CSV files via the secure sidebar panel. As you query the AI Data Assistant, rendered HTML5 charts will broadcast directly into your active dashboard tabs.
