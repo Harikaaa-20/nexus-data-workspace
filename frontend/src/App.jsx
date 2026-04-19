@@ -50,7 +50,8 @@ function App() {
   const handleExport = async () => {
     if (!exportRef.current) return;
     try {
-      const canvas = await html2canvas(exportRef.current, { backgroundColor: '#111827' }); // Use dark background
+      const bgColor = theme === 'dark' ? '#050505' : '#f8fafc';
+      const canvas = await html2canvas(exportRef.current, { backgroundColor: bgColor, scale: 2 });
       const dataUrl = canvas.toDataURL('image/png');
       const a = document.createElement('a');
       a.href = dataUrl;
@@ -196,6 +197,11 @@ function App() {
     socket.emit('ai_query', { username: myUsername, query });
     setQuery('');
   };
+
+  const currentPrimary = theme === 'dark' ? '#06b6d4' : '#0ea5e9';
+  const currentTextMuted = theme === 'dark' ? '#94a3b8' : '#475569';
+  const currentTextMain = theme === 'dark' ? '#f8fafc' : '#0f172a';
+  const currentSurface2 = theme === 'dark' ? '#1e1e2d' : '#ffffff';
 
   return (
     <div className="app-container" onMouseMove={handleMouseMove}>
@@ -447,10 +453,10 @@ function App() {
                     {chart.type === 'line' ? (
                       <LineChart data={chart.data} margin={{ top: 10, right: 10, left: -20, bottom: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                        <XAxis dataKey="name" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} angle={-25} textAnchor="end" height={50} />
-                        <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
-                        <Tooltip contentStyle={{ backgroundColor: 'var(--surface-2)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-main)' }} />
-                        <Line type="monotone" dataKey="value" stroke="var(--primary-glow)" strokeWidth={3} dot={{ r: 4, fill: 'var(--primary)' }} />
+                        <XAxis dataKey="name" stroke={currentTextMuted} tick={{ fill: currentTextMuted, fontSize: 12 }} angle={-25} textAnchor="end" height={50} />
+                        <YAxis stroke={currentTextMuted} tick={{ fill: currentTextMuted, fontSize: 12 }} />
+                        <Tooltip contentStyle={{ backgroundColor: currentSurface2, border: '1px solid rgba(128,128,128,0.2)', borderRadius: '8px', color: currentTextMain }} />
+                        <Line type="monotone" dataKey="value" stroke={currentPrimary} strokeWidth={3} dot={{ r: 4, fill: currentPrimary }} />
                       </LineChart>
                     ) : chart.type === 'pie' ? (
                       <PieChart margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
@@ -459,15 +465,15 @@ function App() {
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                           ))}
                         </Pie>
-                        <Tooltip contentStyle={{ backgroundColor: 'var(--surface-2)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-main)' }} />
+                        <Tooltip contentStyle={{ backgroundColor: currentSurface2, border: '1px solid rgba(128,128,128,0.2)', borderRadius: '8px', color: currentTextMain }} />
                       </PieChart>
                     ) : (
                       <BarChart data={chart.data} margin={{ top: 10, right: 10, left: -20, bottom: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                        <XAxis dataKey="name" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} angle={-25} textAnchor="end" height={50} />
-                        <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
-                        <Tooltip contentStyle={{ backgroundColor: 'var(--surface-2)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-main)' }} cursor={{ fill: 'rgba(128,128,128,0.1)' }} />
-                        <Bar dataKey="value" fill="var(--primary)" radius={[4, 4, 0, 0]} />
+                        <XAxis dataKey="name" stroke={currentTextMuted} tick={{ fill: currentTextMuted, fontSize: 12 }} angle={-25} textAnchor="end" height={50} />
+                        <YAxis stroke={currentTextMuted} tick={{ fill: currentTextMuted, fontSize: 12 }} />
+                        <Tooltip contentStyle={{ backgroundColor: currentSurface2, border: '1px solid rgba(128,128,128,0.2)', borderRadius: '8px', color: currentTextMain }} cursor={{ fill: 'rgba(128,128,128,0.1)' }} />
+                        <Bar dataKey="value" fill={currentPrimary} radius={[4, 4, 0, 0]} />
                       </BarChart>
                     )}
                   </ResponsiveContainer>
