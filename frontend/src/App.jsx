@@ -32,9 +32,23 @@ function App() {
   });
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [tabs, setTabs] = useState([{ id: 1, name: 'Workspace 1', charts: [] }]);
-  const [activeTabId, setActiveTabId] = useState(1);
+  const [tabs, setTabs] = useState(() => {
+    const saved = sessionStorage.getItem('nexus_tabs');
+    return saved ? JSON.parse(saved) : [{ id: 1, name: 'Workspace 1', charts: [] }];
+  });
+  const [activeTabId, setActiveTabId] = useState(() => {
+    const saved = sessionStorage.getItem('nexus_active_tab');
+    return saved ? JSON.parse(saved) : 1;
+  });
   const activeTabRef = React.useRef(1);
+
+  useEffect(() => {
+    sessionStorage.setItem('nexus_tabs', JSON.stringify(tabs));
+  }, [tabs]);
+
+  useEffect(() => {
+    sessionStorage.setItem('nexus_active_tab', JSON.stringify(activeTabId));
+  }, [activeTabId]);
   const [connectedUsers, setConnectedUsers] = useState(1);
   const [query, setQuery] = useState('');
   const [otherCursors, setOtherCursors] = useState({});
@@ -508,7 +522,7 @@ function App() {
           </div>
 
           {messages.map((msg, idx) => (
-            msg.system ? (
+            msg.system || msg.user === 'System' ? (
               <div key={idx} style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)', margin: '0.5rem 0' }}>
                 {msg.text}
               </div>
