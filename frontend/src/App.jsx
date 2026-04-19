@@ -417,7 +417,7 @@ function App() {
             </div>
           ) : (
             tabs.find(t => t.id === activeTabId)?.charts.map((chart, idx) => (
-              <div key={idx} className="stat-card animate-fade-in" style={{ flex: '1 1 100%', minWidth: '400px' }}>
+              <div key={idx} className="stat-card animate-fade-in" style={{ flex: '1 1 100%', minWidth: '280px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
                   <h4 style={{ color: 'var(--accent-glow)' }}>{chart.title}</h4>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>

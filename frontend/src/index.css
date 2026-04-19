@@ -85,10 +85,19 @@ h6 {
 .app-container {
   display: grid;
   grid-template-columns: 260px 1fr 340px;
-  grid-template-rows: 100vh;
+  grid-template-rows: calc(100vh - 3rem);
   gap: 1.5rem;
   padding: 1.5rem;
   height: 100vh;
+}
+
+@media (max-width: 1024px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 /* Base Components */
