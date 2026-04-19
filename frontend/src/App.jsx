@@ -79,7 +79,16 @@ function App() {
     const newSocket = io(SOCKET_SERVER_URL);
     setSocket(newSocket);
 
-    newSocket.on('connect', () => setIsConnected(true));
+    newSocket.on('connect', () => {
+      setIsConnected(true);
+      const savedUser = sessionStorage.getItem('nexus_username');
+      if (savedUser) {
+        setMyUsername(savedUser);
+        setMyColor(COLORS[Math.floor(Math.random() * COLORS.length)]);
+        newSocket.emit('join_workspace', { username: savedUser, roomId });
+        setHasJoined(true);
+      }
+    });
     newSocket.on('disconnect', () => setIsConnected(false));
 
     newSocket.on('chat_history', (history) => {
@@ -168,11 +177,13 @@ function App() {
 
   const handleJoin = (e) => {
     e.preventDefault();
-    if (!usernameInput.trim() || !socket) return;
-    setMyUsername(usernameInput);
+    const user = usernameInput.trim();
+    if (!user || !socket) return;
+    setMyUsername(user);
     setMyColor(COLORS[Math.floor(Math.random() * COLORS.length)]);
-    socket.emit('join_workspace', { username: usernameInput, roomId });
+    socket.emit('join_workspace', { username: user, roomId });
     setHasJoined(true);
+    sessionStorage.setItem('nexus_username', user);
   };
 
   // Track MY mouse movements and send them to the server
