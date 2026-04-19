@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { LayoutDashboard, Users, MessageSquare, Database, Settings, UploadCloud, Plus, Loader2, Download } from 'lucide-react';
+import { LayoutDashboard, Users, MessageSquare, Database, Settings, UploadCloud, Plus, Loader2, Download, Send } from 'lucide-react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import html2canvas from 'html2canvas';
 import './index.css';
@@ -552,7 +552,7 @@ function App() {
               onChange={(e) => setQuery(e.target.value)}
             />
             <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem' }}>
-              <Plus size={18} style={{ transform: 'rotate(45deg)' }} />
+              <Send size={18} />
             </button>
           </form>
         </div>

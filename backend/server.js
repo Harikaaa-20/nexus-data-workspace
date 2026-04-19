@@ -298,7 +298,7 @@ io.on('connection', (socket) => {
             };
             io.to(roomId).emit('dataset_changed', meta);
 
-            const msg = `Workspace active dataset switched to: \${row.filename}`;
+            const msg = `Workspace active dataset switched to: ${row.filename}`;
             db.run("INSERT INTO messages (room_id, username, text) VALUES (?, ?, ?)", [roomId, 'System', msg]);
             io.to(roomId).emit('new_message', { system: true, text: msg });
           }
@@ -319,7 +319,7 @@ io.on('connection', (socket) => {
       generatedChart.generatedBy = queryData.username;
 
       io.to(roomId).emit('chart_generated', generatedChart);
-      db.run("INSERT INTO messages (room_id, username, text) VALUES (?, ?, ?)", [roomId, 'AI', `Generated chart: \${generatedChart.title}`]);
+      db.run("INSERT INTO messages (room_id, username, text) VALUES (?, ?, ?)", [roomId, 'AI', `Generated chart: ${generatedChart.title}`]);
     }, 1200);
   });
 
