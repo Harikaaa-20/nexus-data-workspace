@@ -92,11 +92,17 @@ h6 {
 }
 
 @media (max-width: 1024px) {
+  body {
+    overflow-y: auto;
+    height: auto;
+  }
+
   .app-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     height: auto;
     min-height: 100vh;
+    padding-bottom: 2rem;
   }
 }
 
